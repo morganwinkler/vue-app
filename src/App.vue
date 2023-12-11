@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="small-container">
     <h1>Employees</h1>
+    <employee-form />
+
     <!-- an attribute that begins with a colon will allow you to pass data -->
     <employee-table :employees="employees" />
     <!-- another syntax option -->
@@ -11,11 +13,13 @@
 <script>
 // @ is used to reference the src folder & all imported components must be added to components folder
 import EmployeeTable from "@/components/EmployeeTable.vue";
+import EmployeeForm from "@/components/EmployeeForm.vue";
 
 export default {
   name: "app",
   components: {
     EmployeeTable,
+    EmployeeForm,
   },
   data() {
     return {

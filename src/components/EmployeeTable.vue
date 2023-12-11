@@ -10,17 +10,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Richard Hendricks</td>
-          <td>richard@piedpiper.com</td>
-        </tr>
-        <tr>
-          <td>Bertram Gilfoyle</td>
-          <td>gilfoyle@piedpiper.com</td>
-        </tr>
-        <tr>
-          <td>Dinesh Chugtai</td>
-          <td>dinesh@piedpiper.com</td>
+        <!-- v-for is used to render list from an array -->
+        <!-- vue also requires a unique identifier for looping, use the :key -->
+        <tr v-for="employee in employees" :key="employee.id">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.email }}</td>
         </tr>
       </tbody>
     </table>

@@ -15,10 +15,20 @@
         <!-- v-for is used to render list from an array -->
         <!-- vue also requires a unique identifier for looping, use the :key -->
         <tr v-for="employee in employees" :key="employee.id">
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.email }}</td>
+          <td v-if="editing === employee.id">
+            <input type="text" v-model="employee.name" />
+          </td>
+          <td v-else>{{ employee.name }}</td>
+          <td v-if="editing === employee.id">
+            <input type="text" v-model="employee.email" />
+          </td>
+          <td v-else>{{ employee.email }}</td>
+          <td v-if="editing === employee.id">
+            <button @click="editEmployee(employee)">Save</button>
+            <button class="muted-button" @click="editing = null">Cancel</button>
+          </td>
           <td>
-            <button>Edit</button>
+            <button @click="editMode(employee.id)">Edit</button>
             <button @click="$emit('delete:employee', employee.id)">Delete</button>
           </td>
         </tr>
@@ -33,6 +43,25 @@ export default {
   // tells component it will be receiving props in the form of an array
   props: {
     employees: Array,
+  },
+  data() {
+    return {
+      editing: null,
+    };
+  },
+  methods: {
+    editMode(id) {
+      this.editing = id;
+    },
+    cancelEdit(employee) {
+      Object.assign(employee, this.cachedEmployee);
+      this.editing = null;
+    },
+    editEmployee(employee) {
+      if (employee.name === "" || employee.email === "") return;
+      this.$emit("edit:employee", employee.id, employee);
+      this.editing = null;
+    },
   },
 };
 </script>

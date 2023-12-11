@@ -5,7 +5,7 @@
     <employee-form @add:employee="addEmployee" />
 
     <!-- an attribute that begins with a colon will allow you to pass data -->
-    <employee-table :employees="employees" @delete:employee="deleteEmployee" />
+    <employee-table :employees="employees" @delete:employee="deleteEmployee" @edit:employee="editEmployee" />
   </div>
 </template>
 
@@ -52,6 +52,9 @@ export default {
     },
     deleteEmployee(id) {
       this.employees = this.employees.filter((employee) => employee.id !== id);
+    },
+    editEmployee(id, updatedEmployee) {
+      this.employees = this.employees.map((employee) => (employee.id === id ? updatedEmployee : employee));
     },
   },
 };

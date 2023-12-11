@@ -5,9 +5,7 @@
     <employee-form @add:employee="addEmployee" />
 
     <!-- an attribute that begins with a colon will allow you to pass data -->
-    <employee-table :employees="employees" />
-    <!-- another syntax option -->
-    <!-- <employee-table v-bind:employees="employees" /> -->
+    <employee-table :employees="employees" @delete:employee="deleteEmployee" />
   </div>
 </template>
 
@@ -51,6 +49,9 @@ export default {
       const newEmployee = { ...employee, id };
       // would be this.employees = [...this.employees, employee] if using db
       this.employees = [...this.employees, newEmployee];
+    },
+    deleteEmployee(id) {
+      this.employees = this.employees.filter((employee) => employee.id !== id);
     },
   },
 };

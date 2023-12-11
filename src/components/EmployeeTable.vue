@@ -30,6 +30,10 @@
 <script>
 export default {
   name: "employee-table",
+  // tells component it will be receiving props in the form of an array
+  props: {
+    employees: Array,
+  },
 };
 </script>
 
